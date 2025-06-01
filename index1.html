@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Calendar Generator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Navigation Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <span>📅</span>
+                <h2>Academic Planner</h2>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active" id="nav-dates">Date Selection</a>
+                <a href="#" id="nav-calendar">Calendar</a>
+            </div>
+            <div class="app-info">
+                <p>Create and manage your academic schedules</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Step 1: Date Selection -->
+            <div id="date-selection" class="step active">
+                <div class="card form-container">
+                    <h1><span>📅</span> Academic Calendar Generator</h1>
+                    <div class="form-group">
+                        <label for="semester">Select Semester</label>
+                        <select id="semester" class="form-control" required>
+                            <option value="">-- Select Semester --</option>
+                            <option value="3rd">Semester 3</option>
+                            <option value="4th">Semester 4</option>
+                            <option value="5th">Semester 5</option>
+                            <option value="6th">Semester 6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-date">Course Start Date</label>
+                        <input type="date" id="start-date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-date">Course End Date</label>
+                        <input type="date" id="end-date" class="form-control" required>
+                    </div>
+                    <button id="generate-calendar" class="btn primary-btn">
+                        <span>Generate Calendar</span>
+                        <span>→</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Calendar Management -->
+            <div id="calendar-management" class="step">
+                <div class="card calendar-header">
+                    <h1 id="calendar-title"></h1>
+                    <div class="controls">
+                        <!-- <button id="back-to-dates" class="btn secondary-btn">
+                            <span>←</span> Change Dates
+                        </button> -->
+                        <div class="color-picker">
+                            <label>Title Color:</label>
+                            <input type="color" id="title-color" value="#3f51b5">
+                        </div>
+                        <button id="download-pdf" class="btn primary-btn">
+                            <span>Download PDF</span>
+                            <span>↓</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card event-controls">
+                    <div class="event-type-selector">
+                        <h3>📝 Event Management</h3>
+                        <div class="event-type-options">
+                            <button class="event-type-btn" data-type="event">
+                                <span>📌</span> Event
+                            </button>
+                            <button class="event-type-btn" data-type="exam">
+                                <span>📝</span> Exam
+                            </button>
+                            <button class="event-type-btn" data-type="holiday">
+                                <span>🎉</span> Holiday
+                            </button>
+                            <button class="event-type-btn" data-type="remove">
+                                <span>❌</span> Remove
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="event-description">
+                        <div class="form-group">
+                            <label for="event-desc">📋 Event Description</label>
+                            <input type="text" id="event-desc" class="form-control"
+                                placeholder="Enter event description">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card calendar-container" id="calendar-container">
+                    <div id="pdf-title" style="display: none;"></div>
+                    <table id="calendar-table">
+                        <thead>
+                            <tr>
+                                <th>WEEK</th>
+                                <th>MONTH</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                                <th>Sun</th>
+                                <th>WORK DAYS</th>
+                                <th>REMARKS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calendar-body">
+                            <!-- Calendar will be generated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="holidays.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
